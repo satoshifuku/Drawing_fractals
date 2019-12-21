@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import os
 from matplotlib import pyplot as plt
 from matplotlib import patches
 
@@ -27,26 +28,33 @@ def main():
     plt.xlim(-5, 5)
     plt.ylim(-5, 5)
 
+    dir = "./img"
+    if os.path.exists(dir) is not True:
+        os.mkdir(dir)
+
     n = 10
     xy = np.c_[np.array([-2.0, -2.0])]
     v = np.c_[np.array([4.0, 4.0])] 
     currentAngle = 0
-    
+    imgs = []
+
+
     for i in range(n):
         print("--------------")
 
         v = np.dot(rot_matrix(currentAngle) , v)
         print(v)        
 
-        rectangle = draw_square((xy[0], xy[1]), v[0], v[1], 0)
+        draw_square((xy[0], xy[1]), v[0], v[1], 0)
         # imgs.append(plt.axes().add_patch(rectangle))
 
         xy = xy + v
         v = golden_ratio() * v
         currentAngle = -0.5 * math.pi
 
-    
-    fig.savefig('img.png', dpi=800)
+        # fig.savefig(os.path.join(dir, 'img{:02x}.png').format(i), dpi=800)
+
+    fig.savefig(os.path.join(dir, 'img.png'), dpi=800)
     print('finished')
   
 
