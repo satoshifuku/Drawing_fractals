@@ -26,17 +26,20 @@ def main():
 
     xy = np.c_[np.array([0.0, 0.0])]
     v = np.c_[np.array([2.0, 2.0])] 
-
+    currentAngle = 0
     for i in range(10):
         print("--------------")
-        print(xy)
-        currentAngle = 0.5 * i * math.pi
-        
-        rectangle = draw_square((xy[0], xy[1]), v[0], v[1], 90 * (i + 1))
+        # print(xy)
+
+        v = np.dot(rot_matrix(currentAngle) , v)
+        print(v)        
+
+        rectangle = draw_square((xy[0], xy[1]), v[0], v[1], 0)
         ax1.add_patch(rectangle)
 
-        v *= golden_ratio()
-        xy = xy + np.dot(rot_matrix(currentAngle) , v)
+        xy = xy + v
+        v = golden_ratio() * v
+        currentAngle = -0.5 * math.pi
 
     
     plt.xlim(-4, 4)
