@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from matplotlib import patches
 
 
-vector = np.matrix([1,1]) 
+vector = np.matrix([0,1]) 
 
 
 def rot_matrix(angle):
@@ -21,7 +21,7 @@ def draw_square(xy, w, h, angle):
 
 def main():
     print("Draw fractal.")
-
+    
     fig = plt.figure(figsize=(16, 12))
     ax1 = fig.add_subplot(111)
 
