@@ -33,7 +33,7 @@ def draw_square_fill(xy, w, h):
 def main():
     print("Draw fractal.")
     
-    fig = plt.figure(figsize=(16, 12))
+    fig = plt.figure(figsize=(32, 24))
     plt.axes().set_aspect('equal')
     plt.xlim(-5, 5)
     plt.ylim(-5, 5)
@@ -43,7 +43,7 @@ def main():
         os.mkdir(dir)
 
     n = 20
-    xy = np.c_[np.array([-2.0, -2.0])]
+    xy = np.c_[np.array([-3.0, -2.0])]
     v = np.c_[np.array([4.0, 4.0])] 
     currentAngle = 0
     imgs = []
