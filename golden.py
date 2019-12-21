@@ -14,11 +14,14 @@ def golden_ratio():
     return 0.5 * (-1 + math.sqrt(5.0))
 
 
-def draw_square(xy, w, h, angle):
+def draw_square_rect(xy, w, h, angle):
+    return plt.Rectangle(xy, w, h, angle, ec='k', fill=False)
+
+
+def draw_square_plot(xy, w, h):
     xs = [xy[0], xy[0] ,xy[0] + w ,xy[0] + w,xy[0]]
     ys = [xy[1], xy[1] + h, xy[1] + h ,xy[1] ,xy[1]]
     return plt.plot(xs,ys, linestyle="-"),
-    # return plt.Rectangle(xy, w, h, angle, ec='k', fill=False)
 
 
 def main():
@@ -45,7 +48,7 @@ def main():
         v = np.dot(rot_matrix(currentAngle) , v)
         print(v)        
 
-        img = draw_square((xy[0], xy[1]), v[0], v[1], 0)
+        img = draw_square_plot((xy[0], xy[1]), v[0], v[1])
         imgs.extend(img)
 
         xy = xy + v
