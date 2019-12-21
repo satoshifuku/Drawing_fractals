@@ -4,15 +4,14 @@ from matplotlib import pyplot as plt
 from matplotlib import patches
 
 
-vector = np.matrix([0,1]) 
 
 
 def rot_matrix(angle):
-    return np.matrix([[math.cos(angle), -math.sin(angle)],[math.sin(angle),math.cos(angle)]])
+    return np.array([[math.cos(angle), -math.sin(angle)],[math.sin(angle),math.cos(angle)]])
 
 
-def get_golden_ratio(length):
-    return 0.5 * (length + math.sqrt(5))
+def golden_ratio():
+    return 0.5 * (-1 + math.sqrt(5.0))
 
 
 def draw_square(xy, w, h, angle):
@@ -25,11 +24,23 @@ def main():
     fig = plt.figure(figsize=(16, 12))
     ax1 = fig.add_subplot(111)
 
-    rectangle = draw_square((-0.5, 0.5), 1.0, 1.0, -90)
-    ax1.add_patch(rectangle)
+    xy = np.c_[np.array([0.0, 0.0])]
+    v = np.c_[np.array([2.0, 2.0])] 
 
-    plt.xlim(-2, 2)
-    plt.ylim(-2, 2)
+    for i in range(10):
+        print("--------------")
+        print(xy)
+        currentAngle = 0.5 * i * math.pi
+        
+        rectangle = draw_square((xy[0], xy[1]), v[0], v[1], 90 * (i + 1))
+        ax1.add_patch(rectangle)
+
+        v *= golden_ratio()
+        xy = xy + np.dot(rot_matrix(currentAngle) , v)
+
+    
+    plt.xlim(-4, 4)
+    plt.ylim(-4, 4)
 
     ax1.set_aspect('equal')
 
