@@ -4,6 +4,12 @@ from matplotlib import pyplot as plt
 from matplotlib import patches
 
 
+vector = np.matrix([1,1]) 
+
+
+def rot_matrix(angle):
+    return np.matrix([[math.cos(angle), -math.sin(angle)],[math.sin(angle),math.cos(angle)]])
+
 
 def get_golden_ratio(length):
     return 0.5 * (length + math.sqrt(5))
