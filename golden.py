@@ -4,6 +4,10 @@ from matplotlib import pyplot as plt
 from matplotlib import patches
 
 
+def get_golden_ratio(length):
+    return 0.5 * (rength + math.sqrt(5))
+
+
 def draw_square(xy, w, h, angle):
     return patches.Rectangle(xy, w, h, angle, ec='k', fill=False)
 
