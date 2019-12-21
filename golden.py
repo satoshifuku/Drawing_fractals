@@ -3,6 +3,7 @@ import math
 import os
 from matplotlib import pyplot as plt
 from matplotlib import patches
+import matplotlib.animation as animation
 
 
 def rot_matrix(angle):
@@ -16,7 +17,7 @@ def golden_ratio():
 def draw_square(xy, w, h, angle):
     xs = [xy[0], xy[0] ,xy[0] + w ,xy[0] + w,xy[0]]
     ys = [xy[1], xy[1] + h, xy[1] + h ,xy[1] ,xy[1]]
-    return plt.plot(xs,ys, linestyle="-")
+    return plt.plot(xs,ys, linestyle="-"),
     # return plt.Rectangle(xy, w, h, angle, ec='k', fill=False)
 
 
@@ -38,23 +39,23 @@ def main():
     currentAngle = 0
     imgs = []
 
-
     for i in range(n):
         print("--------------")
 
         v = np.dot(rot_matrix(currentAngle) , v)
         print(v)        
 
-        draw_square((xy[0], xy[1]), v[0], v[1], 0)
-        # imgs.append(plt.axes().add_patch(rectangle))
+        img = draw_square((xy[0], xy[1]), v[0], v[1], 0)
+        imgs.extend(img)
 
         xy = xy + v
         v = golden_ratio() * v
         currentAngle = -0.5 * math.pi
 
-        # fig.savefig(os.path.join(dir, 'img{:02x}.png').format(i), dpi=800)
 
     fig.savefig(os.path.join(dir, 'img.png'), dpi=800)
+    ani = animation.ArtistAnimation(fig, imgs)
+    ani.save(os.path.join(dir, 'anim.gif'), writer="imagemagick")
     print('finished')
   
 
