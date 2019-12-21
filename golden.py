@@ -4,8 +4,9 @@ from matplotlib import pyplot as plt
 from matplotlib import patches
 
 
+
 def get_golden_ratio(length):
-    return 0.5 * (rength + math.sqrt(5))
+    return 0.5 * (length + math.sqrt(5))
 
 
 def draw_square(xy, w, h, angle):
