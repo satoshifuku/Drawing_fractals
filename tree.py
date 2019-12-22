@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import math
 
-def drawTree_symmetry(x1, y1, radian, recursion_n):
+
+def drawTree_symmetry(x1, y1, radian, n_branch=2, weight=0.5, recursion_n=4):
 
     if recursion_n >= 0:
 
@@ -13,11 +14,10 @@ def drawTree_symmetry(x1, y1, radian, recursion_n):
         y_list = [y1, y2]        
 
         plt.plot(x_list, y_list, linestyle="-",color=cm.hsv(recursion_n / 5.0),linewidth=3.0)
-        n_div = 4
-        weight = 0.5
-        for i in range(n_div):
-            rot = radian + weight * (i * math.pi/n_div + 0.5 * math.pi * ((1 - n_div) / n_div))
-            drawTree_symmetry(x2, y2, rot, recursion_n - 1)                
+        
+        for i in range(n_branch):
+            rot = radian + weight * (i * math.pi/n_branch + 0.5 * math.pi * ((1 - n_branch) / n_branch))
+            drawTree_symmetry(x2, y2, rot, n_branch ,weight , recursion_n - 1)                
 
 
 
@@ -44,7 +44,8 @@ def main():
     fig = plt.figure(figsize=(32, 24))
     plt.axes().set_aspect('equal')
 
-    drawTree_simple(1, 1, 0.5 * math.pi, 7)
+    # drawTree_simple(1, 1, 0.5 * math.pi, 10)
+    drawTree_symmetry(1, 1, 0.5 * math.pi,2 ,0.6, 10)
 
     fig.savefig('img.png', dpi=200)
 
